@@ -1,12 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../../redux/features/todo/todoSlice";
+import todoExitsAlert from "./todoExist";
 
 const TodoForm = () => {
+  const { todos } = useSelector((state) => state.todos);
+
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo(e.target.todo.value));
-    e.target.todo.value = "";
+    const data = e.target.todo.value;
+    // checking todo is exist or not
+
+    if (data) {
+      const findTodo = todos.find((todo) => todo.text === data);
+      if (!findTodo) {
+        dispatch(addTodo(data));
+        e.target.todo.value = "";
+      } else {
+        todoExitsAlert();
+      }
+    }
   };
 
   return (
