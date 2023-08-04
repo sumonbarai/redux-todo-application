@@ -15,7 +15,7 @@ const todoDeleteAlert = (id) => {
       store.dispatch(removeTodo(id));
       Swal.fire(
         {
-          title: "Your file has been deleted!",
+          title: "Your Todo has been deleted!",
           icon: "success",
           confirmButtonColor: "#14B8A6",
           confirmButtonText: "ok",
